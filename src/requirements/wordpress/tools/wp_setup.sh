@@ -1,25 +1,29 @@
 #!/bin/bash
 
-#--------------mariadb start--------------#
-service mariadb start # start mariadb
-sleep 5 # wait for mariadb to start
+#--------------secrets read--------------#
+MYSQL_PASSWORD=$(cat /run/secrets/db_password)
+WP_ADMIN_P=$(cat /run/secrets/wp_password)
+WP_U_PASS=$(cat /run/secrets/wp_admin_password)
 
-#--------------mariadb config--------------#
-# Create database if not exists
-mariadb -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DB}\`;"
+wp core download --path=/var/www/wordpress --locale=fr_FR
 
-# Create user if not exists
-mariadb -e "CREATE USER IF NOT EXISTS \`${MYSQL_USER}\`@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+wp config create \
+	--dbname=$MYSQL_DB \
+	--dbuser=$MYSQL_USER \
+	--dbpass=$MYSQL_PASSWORD \
+	--dbhost=mariadb
 
-# Grant privileges to user
-mariadb -e "GRANT ALL PRIVILEGES ON ${MYSQL_DB}.* TO \`${MYSQL_USER}\`@'%';"
+wp core install \
+	--url=$DOMAIN_NAME \
+	--title=$WP_TITLE \
+	--admin_user=$WP_ADMIN_N \
+	--admin_password=$WP_ADMIN_P \
+	--admin_email=$WP_ADMIN_E
 
-# Flush privileges to apply changes
-mariadb -e "FLUSH PRIVILEGES;"
+wp user create \
+	--role=author \
+	$WP_USER_N \
+	$WP_USER_E \
+	--user_pass=$WP_U_PASS
 
-#--------------mariadb restart--------------#
-# Shutdown mariadb to restart with new config
-mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown
-
-# Restart mariadb with new config in the background to keep the container running
-mysqld_safe --port=3306 --bind-address=0.0.0.0 --datadir='/var/lib/mysql'
+exec php-fpm7.4
