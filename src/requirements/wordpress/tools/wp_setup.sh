@@ -33,6 +33,16 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 		--user_pass=$WP_USER_PASS \
 		--path=/var/www/wordpress \
 		--allow-root
+
+	#Bonus [redis]
+	wp plugin install redis-cache \
+		--activate --allow-root --path=/var/www/wordpress
+	wp config set WP_REDIS_HOST redis \
+		--allow-root --path=/var/www/wordpress
+	wp config set WP_REDIS_PORT 6379  \
+		--raw --allow-root --path=/var/www/wordpress
+	wp redis enable \
+		--allow-root --path=/var/www/wordpress
 fi
 
 mkdir -p /run/php
