@@ -76,6 +76,15 @@ services:
     networks:
       - inception
 
+  static:
+    build: ./requirements/bonus/static
+    container_name: static
+    ports:
+      - "8080:80"
+    restart: always
+    networks:
+      - inception
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt

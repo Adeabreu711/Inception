@@ -1,7 +1,7 @@
 .PHONY : all down clean fclean re debug
 
 NAME = inception
-COMP = srcs/docker-compose.yml
+COMP = src/docker-compose.yml
 
 all:
 	mkdir -p /home/alexandre/data/wordpress_data
