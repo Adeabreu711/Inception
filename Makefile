@@ -6,6 +6,7 @@ COMP = src/docker-compose.yml
 all:
 	mkdir -p /home/alexandre/data/wordpress_data
 	mkdir -p /home/alexandre/data/mariadb_data
+	mkdir -p /home/alexandre/data/minecraft_data
 	docker compose -f $(COMP) up --build
 
 down:

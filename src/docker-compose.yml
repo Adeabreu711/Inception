@@ -97,6 +97,17 @@ services:
       mariadb:
         condition: service_healthy
 
+  minecraft:
+    build: ./requirements/bonus/minecraft
+    container_name: minecraft
+    ports:
+      - "25565:25565"
+    restart: always
+    volumes:
+      - minecraft_data:/minecraft/world
+    networks:
+      - inception
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt
@@ -122,6 +133,12 @@ volumes:
       type: none
       o: bind
       device: /home/alexandre/data/wordpress_data
+  minecraft_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/alexandre/data/minecraft_data
 
 networks:
   inception:
