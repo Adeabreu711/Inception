@@ -12,5 +12,5 @@ COPY ./config/nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /var/www/wordpress
 RUN chown -R www-data:www-data /var/www/wordpress
 
-EXPOSE 80 443
+EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]
