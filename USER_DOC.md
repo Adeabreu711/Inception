@@ -1,31 +1,37 @@
-**User Documentation**
-Services Provided
+```md
+# User Documentation
+
+## Services Provided
 WordPress: Content management system available at https://alde-abr.42.fr
 NGINX: Web server secured with TLS 1.2 / 1.3
 MariaDB: Database (internal access only)
 Data is stored in /home/alde-abr/data/
-Starting and Stopping
+```
+## Starting and Stopping
+```bash
 
-Start:
+### Start:
 
 make
 
-Stop:
+### Stop:
 
 make down
 
-Check status:
+### Check status:
 
 sudo docker ps
-Accessing the Website
+
+```
+## Accessing the Website
 
 Main site: https://alde-abr.42.fr
 
 Admin panel: https://alde-abr.42.fr/wp-admin
 
-(Accept the self-signed certificate warning in your browser.)
+> (Accept the self-signed certificate warning in your browser.)
 
-**Credentials**
+## Credentials
 
 Passwords are located in the secrets/ directory:
 
@@ -41,14 +47,18 @@ WP_ADMIN_NAME (admin)
 WP_USER_USER (subscriber)
 Checking Services
 
-Status:
+## Checking
+```bash
+
+### Status:
 
 sudo docker ps
 
-Logs:
+### Logs:
 
 sudo docker compose -f srcs/docker-compose.yml logs
 
-Test access:
+### Test access:
 
 curl -k https://alde-abr.42.fr
+```
