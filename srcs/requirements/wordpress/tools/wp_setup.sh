@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#--------------secrets read--------------#
+# Secrets
 MYSQL_PASS=$(cat /run/secrets/db_password)
 WP_ADMIN_PASS=$(cat /run/secrets/wp_admin_password)
 WP_USER_PASS=$(cat /run/secrets/wp_password)
@@ -34,7 +34,7 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 		--path=/var/www/wordpress \
 		--allow-root
 
-	#Bonus [redis]
+	# Bonus [redis]
 	wp plugin install redis-cache \
 		--activate --allow-root --path=/var/www/wordpress
 	wp config set WP_REDIS_HOST redis \
