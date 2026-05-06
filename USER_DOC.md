@@ -5,6 +5,10 @@
 WordPress: Content management system available at https://alde-abr.42.fr
 NGINX: Web server secured with TLS 1.2 / 1.3
 MariaDB: Database (internal access only)
+Redis cache: In-memory cache to improve performance
+FTP server: Allows secure file transfers to the server
+Adminer: Web interface to manage the database
+Minecraft: minecraft server version 21.0.5 
 Data is stored in /home/alde-abr/data/
 ```
 ## Starting and Stopping
