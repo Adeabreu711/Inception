@@ -1,7 +1,7 @@
 .PHONY : all down clean fclean re debug
 
 NAME = inception
-COMP = src/docker-compose.yml
+COMP = srcs/docker-compose.yml
 USER = alde-abr
 
 all:
