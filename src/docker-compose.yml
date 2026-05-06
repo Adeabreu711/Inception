@@ -30,6 +30,11 @@ services:
       - wordpress_data:/var/www/wordpress
     networks:
       - inception
+    depends_on:
+      wordpress:
+        condition: service_started
+      adminer:
+        condition: service_started
 
   wordpress:
     build: ./requirements/wordpress
@@ -126,19 +131,19 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/alexandre/data/mariadb_data
+      device: /home/alde-abr/data/mariadb_data
   wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/alexandre/data/wordpress_data
+      device: /home/alde-abr/data/wordpress_data
   minecraft_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/alexandre/data/minecraft_data
+      device: /home/alde-abr/data/minecraft_data
 
 networks:
   inception:

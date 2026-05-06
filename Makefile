@@ -2,11 +2,12 @@
 
 NAME = inception
 COMP = src/docker-compose.yml
+USER = alde-abr
 
 all:
-	mkdir -p /home/alexandre/data/wordpress_data
-	mkdir -p /home/alexandre/data/mariadb_data
-	mkdir -p /home/alexandre/data/minecraft_data
+	mkdir -p /home/$(USER)/data/wordpress_data
+	mkdir -p /home/$(USER)/data/mariadb_data
+	mkdir -p /home/$(USER)/data/minecraft_data
 	docker compose -f $(COMP) up --build
 
 down:
@@ -17,6 +18,6 @@ clean:
 
 fclean: clean
 	sudo docker system prune -af
-	sudo rm -rf /home/alexandre/data
+	sudo rm -rf /home/$(USER)/data
 
 re: fclean all
