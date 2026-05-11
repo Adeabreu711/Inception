@@ -18,6 +18,7 @@ mariadb -u root -e "FLUSH PRIVILEGES;"
 
 # Shutdown mariadb to restart with new config
 mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown
+sleep 2
 
 # Restart mariadb with new config in the background to keep the container running
 exec mysqld_safe --port=3306 --bind-address=0.0.0.0 --datadir='/var/lib/mysql'

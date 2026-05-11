@@ -5,6 +5,11 @@ MYSQL_PASS=$(cat /run/secrets/db_password)
 WP_ADMIN_PASS=$(cat /run/secrets/wp_admin_password)
 WP_USER_PASS=$(cat /run/secrets/wp_password)
 
+until bash -c "echo > /dev/tcp/mariadb/3306" 2>/dev/null; do
+    echo "MariaDB pas encore prête, on attend..."
+    sleep 3
+done
+
 if [ ! -f /var/www/wordpress/wp-config.php ]; then
 
 	wp core download --path=/var/www/wordpress --locale=fr_FR --allow-root
