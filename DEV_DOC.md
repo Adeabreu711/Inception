@@ -115,7 +115,7 @@ docker network inspect *network_name*
 openssl s_client -connect localhost:*port*
 # Retrieve the SSL certificate for the specified port
 
-curl -v http://localhost:*port*
+curl -v https://localhost:*port*
 # Attempt to connect to the specified port
 ```
 
@@ -176,6 +176,9 @@ put *file.txt*
 
 get *file.txt*
 # Download a file
+
+docker exec -t wordpress ls /var/www/wordpress | grep *file.txt*
+#Check if the file is in wordpress volume
 
 quit
 # Exit FTP
